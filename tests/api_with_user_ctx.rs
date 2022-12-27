@@ -9,3 +9,15 @@ async fn with_user_ctx() -> Result<()> {
     assert!(get_api_app_ctx().with_user_ctx().await.is_err());
     Ok(())
 }
+
+#[tokio::test]
+async fn get_my_reverse_chronological_timeline() -> Result<()> {
+    let _ = get_api_user_ctx()
+        .await
+        .with_user_ctx()
+        .await?
+        .get_my_reverse_chronological_timeline()
+        .send()
+        .await?;
+    Ok(())
+}

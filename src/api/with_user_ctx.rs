@@ -85,6 +85,19 @@ where
     pub fn get_my_tweets(&self) -> GetTimelineRequestBuilder<A, Vec<Tweet>, TweetsMeta> {
         self.client.get_user_tweets(self.user_id)
     }
+    pub fn get_my_reverse_chronological_timeline(
+        &self,
+    ) -> GetTimelineRequestBuilder<A, Vec<Tweet>, TweetsMeta> {
+        GetTimelineRequestBuilder::new(
+            &self.client,
+            self.client
+                .url(format!(
+                    "users/{0}/timelines/reverse_chronological",
+                    self.user_id
+                ))
+                .unwrap(),
+        )
+    }
     pub fn get_my_mentions(&self) -> GetTimelineRequestBuilder<A, Vec<Tweet>, TweetsMeta> {
         self.client.get_user_tweets(self.user_id)
     }
